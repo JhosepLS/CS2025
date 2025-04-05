@@ -1,19 +1,20 @@
-from flask import Flask, jsonify
+from flask import Flask
+from flask import jsonify
 from flask_cors import CORS
-from routes import api
 
-# Inicializar la aplicación Flask
+from backend.blueprints.libro_blueprint import libro_blueprint
+from backend.blueprints.autor_blueprint import autor_blueprint
+
 app = Flask(__name__)
-CORS(app)  # Permitir CORS para todas las rutas
 
-# Registrar blueprint
-app.register_blueprint(api)
+app.register_blueprint(libro_blueprint)
+app.register_blueprint(autor_blueprint)
 
-# Ruta raíz
+cors = CORS(app)
+
 @app.route('/', methods=['GET'])
 def index():
     return jsonify({'mensaje': '¡Bienvenido a la API de Biblioteca!'})
 
-# Iniciar el servidor
 if __name__ == "__main__":
     app.run(debug=True)
