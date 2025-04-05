@@ -52,7 +52,6 @@ API para gestionar autores y libros usando Flask y SQLite.
 3. **Crear un nuevo autor**:
    - Método: POST
    - URL: `http://localhost:5000/autor`
-   - Headers: `Content-Type: application/json`
    - Body:
    ```json
    {
@@ -66,7 +65,6 @@ API para gestionar autores y libros usando Flask y SQLite.
 4. **Actualizar un autor**:
    - Método: PUT
    - URL: `http://localhost:5000/autor/1`
-   - Headers: `Content-Type: application/json`
    - Body:
    ```json
    {
@@ -102,7 +100,6 @@ API para gestionar autores y libros usando Flask y SQLite.
 4. **Crear un nuevo libro**:
    - Método: POST
    - URL: `http://localhost:5000/libro`
-   - Headers: `Content-Type: application/json`
    - Body:
    ```json
    {
@@ -117,7 +114,6 @@ API para gestionar autores y libros usando Flask y SQLite.
 5. **Actualizar un libro**:
    - Método: PUT
    - URL: `http://localhost:5000/libro/1`
-   - Headers: `Content-Type: application/json`
    - Body:
    ```json
    {
