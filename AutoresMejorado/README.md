@@ -36,8 +36,31 @@ venv\Scripts\activate
 
 ### 3. Instalar dependencias
 
+Alternativa más simple (usando el requirements.txt actualizado):
+
 ```bash
 pip install -r requirements.txt
+```
+
+Nota: Si encuentras problemas con algún paquete, intenta instalarlo individualmente como se muestra ahora
+
+Para una instalación más robusta, instalar cada paquete individualmente:
+```bash
+# Instalar Flask y dependencias principales
+pip install flask==2.3.3
+pip install flask-cors==4.0.0
+
+# Instalar PostgreSQL
+pip install psycopg2-binary==2.9.10
+
+# Instalar dotenv
+python -m pip install python-dotenv==1.0.0
+
+# Instalar bcrypt con flask-bcrypt
+pip install flask-bcrypt==1.0.1
+
+# Instalar JWT para autenticación
+pip install PyJWT==2.8.0
 ```
 
 ### 4. Configurar variables de entorno
