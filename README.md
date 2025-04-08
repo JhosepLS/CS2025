@@ -13,6 +13,12 @@ Autores y Libros, backend para mantenimiento de Autores y Libros
 
 Carpeta: Autores
 
+## Tercer Trabajo
+
+Autores y libros mejorado, backend para un mantenimiento de Autores, libros y géneros con autenticación de tokens usando JWS.
+
+Carpeta: AutoresMejorado
+
 ## Integrantes:
 - Jhosep Alonso Mollapaza Morocco
 - Diego Alessandro Alvarez Cruz
