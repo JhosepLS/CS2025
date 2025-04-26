@@ -19,6 +19,10 @@ Autores y libros mejorado, backend para un mantenimiento de Autores, libros y g√
 
 Carpeta: AutoresMejorado
 
+## Cuarto Trabajo
+
+Autores y libros mejorado usando Mongoose y Express, con autenticaci√≥n de tokens usando JWS.
+
 ## Integrantes:
 - Jhosep Alonso Mollapaza Morocco
 - Diego Alessandro Alvarez Cruz
