@@ -1,4 +1,3 @@
-// src/utils/seedData.js
 const bcrypt = require('bcrypt');
 const {
   Usuario,
@@ -18,17 +17,15 @@ const seedData = async () => {
     console.log('Iniciando carga de datos iniciales...');
 
     // Crear usuario admin
-    const adminPassword = await bcrypt.hash('admin', 10);
     const adminUser = await Usuario.create({
       nombre: 'Administrador',
       apellido: 'Sistema',
       email: 'admin@matriculas.com',
-      password: adminPassword,
+      password: 'admin123',
       rol: 'admin'
     });
 
-    console.log('Usuario administrador creado');
-
+    console.log(`Usuario administrador creado con ID: ${adminUser.id}`);
     // Crear facultades
     const facultad1 = await Facultad.create({
       nombre: 'Facultad de Ingeniería',
