@@ -34,6 +34,8 @@ cd Matriculas
 
 ```bash
 npm install
+
+npm install --save-dev swagger-autogen
 ```
 
 3. **Configuración de base de datos**
