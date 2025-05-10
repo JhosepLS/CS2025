@@ -12,6 +12,7 @@ yarn.lock
 
 # Archivos generados automáticamente
 swagger-output.json
+matriculas_api_collection.json
 
 # Archivos de log
 logs
