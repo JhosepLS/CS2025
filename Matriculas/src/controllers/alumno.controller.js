@@ -1,4 +1,5 @@
-const { Alumno, Usuario, Escuela, PlanEstudio, Matricula, sequelize } = require('../models');
+const { Alumno, Usuario, Escuela, PlanEstudio, Matricula } = require('../models');
+const { sequelize } = require('../config/database');
 const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 

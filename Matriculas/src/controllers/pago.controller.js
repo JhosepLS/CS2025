@@ -1,4 +1,5 @@
-const { Pago, Matricula, Alumno, Usuario, sequelize } = require('../models');
+const { Pago, Matricula, Alumno, Usuario } = require('../models');
+const { sequelize } = require('../config/database');
 
 // Crear un nuevo pago
 const createPago = async (req, res) => {

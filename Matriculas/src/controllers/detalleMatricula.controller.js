@@ -1,4 +1,5 @@
-const { DetalleMatricula, Matricula, Seccion, Curso, sequelize } = require('../models');
+const { DetalleMatricula, Matricula, Seccion, Curso } = require('../models');
+const { sequelize } = require('../config/database');
 
 // Obtener todos los detalles de matrícula
 const getAllDetallesMatricula = async (req, res) => {

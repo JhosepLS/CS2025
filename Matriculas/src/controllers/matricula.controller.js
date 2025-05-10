@@ -1,13 +1,12 @@
 const { 
-    Matricula, 
-    Alumno, 
-    PeriodoAcademico, 
-    DetalleMatricula, 
-    Seccion,
-    Curso,
-    sequelize
-  } = require('../models');
-  const { Op } = require('sequelize');
+  Matricula, 
+  Alumno, 
+  PeriodoAcademico, 
+  DetalleMatricula, 
+  Seccion,
+  Curso
+} = require('../models');
+const { sequelize } = require('../config/database');
   
   // Crear una nueva matrícula
   const createMatricula = async (req, res) => {

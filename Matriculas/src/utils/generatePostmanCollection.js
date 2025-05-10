@@ -155,9 +155,9 @@ const escuelaRequests = [
 const planEstudioRequests = [
   createRequest("Crear plan de estudio", "POST", "planes-estudio", {
     escuelaId: 1,
-    codigo: "PE-2023",
-    nombre: "Plan de Estudios 2023",
-    fechaInicio: "2023-01-01",
+    codigo: "PE-2025",
+    nombre: "Plan de Estudios 2025",
+    fechaInicio: "2025-01-01",
     fechaFin: "2027-12-31",
     totalCreditos: 200,
     totalCiclos: 10
@@ -175,7 +175,7 @@ const planEstudioRequests = [
   createRequest("Obtener planes de estudio por escuela", "GET", "planes-estudio/escuela/1", null, "Obtiene todos los planes de estudio de una escuela"),
   createRequest("Obtener plan de estudio por ID", "GET", "planes-estudio/1", null, "Obtiene los detalles de un plan de estudio específico"),
   createRequest("Actualizar plan de estudio", "PUT", "planes-estudio/1", {
-    nombre: "Plan de Estudios 2023 Actualizado",
+    nombre: "Plan de Estudios 2025 Actualizado",
     totalCreditos: 205,
     activo: true
   }, "Actualiza los datos de un plan de estudio existente"),
@@ -353,25 +353,25 @@ const alumnoRequests = [
 // 9. Crear carpeta de periodos académicos
 const periodoAcademicoRequests = [
   createRequest("Crear periodo académico 1", "POST", "periodos-academicos", {
-    nombre: "Semestre 2023-I",
-    codigo: "2023-1",
-    fechaInicio: "2023-03-01",
-    fechaFin: "2023-07-31",
-    fechaInicioMatricula: "2023-02-01",
-    fechaFinMatricula: "2023-02-15",
-    fechaInicioMatriculaExtemporanea: "2023-02-16",
-    fechaFinMatriculaExtemporanea: "2023-02-28",
+    nombre: "Semestre 2025-I",
+    codigo: "2025-1",
+    fechaInicio: "2025-03-01",
+    fechaFin: "2025-07-31",
+    fechaInicioMatricula: "2025-05-01",
+    fechaFinMatricula: "2025-06-15",
+    fechaInicioMatriculaExtemporanea: "2025-06-16",
+    fechaFinMatriculaExtemporanea: "2025-06-28",
     estado: "programado"
   }, "Crea un nuevo periodo académico"),
   createRequest("Crear periodo académico 2", "POST", "periodos-academicos", {
-    nombre: "Semestre 2023-II",
-    codigo: "2023-2",
-    fechaInicio: "2023-08-01",
-    fechaFin: "2023-12-15",
-    fechaInicioMatricula: "2023-07-01",
-    fechaFinMatricula: "2023-07-15",
-    fechaInicioMatriculaExtemporanea: "2023-07-16",
-    fechaFinMatriculaExtemporanea: "2023-07-31",
+    nombre: "Semestre 2025-II",
+    codigo: "2025-2",
+    fechaInicio: "2025-08-01",
+    fechaFin: "2025-12-15",
+    fechaInicioMatricula: "2025-07-01",
+    fechaFinMatricula: "2025-07-15",
+    fechaInicioMatriculaExtemporanea: "2025-07-16",
+    fechaFinMatriculaExtemporanea: "2025-07-31",
     estado: "programado"
   }, "Crea otro periodo académico"),
   createRequest("Obtener todos los periodos académicos", "GET", "periodos-academicos", null, "Obtiene la lista de todos los periodos académicos"),
@@ -379,9 +379,9 @@ const periodoAcademicoRequests = [
   createRequest("Obtener periodo académico actual", "GET", "periodos-academicos/actual", null, "Obtiene el periodo académico actual o próximo"),
   createRequest("Obtener periodo académico por ID", "GET", "periodos-academicos/1", null, "Obtiene los detalles de un periodo académico específico"),
   createRequest("Actualizar periodo académico", "PUT", "periodos-academicos/1", {
-    nombre: "Semestre 2023-I Actualizado",
-    fechaInicioMatricula: "2023-02-05",
-    fechaFinMatricula: "2023-02-20"
+    nombre: "Semestre 2025-I Actualizado",
+    fechaInicioMatricula: "2025-05-05",
+    fechaFinMatricula: "2025-06-20"
   }, "Actualiza los datos de un periodo académico existente"),
   createRequest("Actualizar estado de periodo académico", "PATCH", "periodos-academicos/1/estado", {
     estado: "en_curso"
@@ -596,9 +596,9 @@ const flujoCompletoRequests = [
   }, "Crear una escuela"),
   createRequest("1.4 Crear plan de estudio", "POST", "planes-estudio", {
     escuelaId: 1,
-    codigo: "PE-2023",
-    nombre: "Plan de Estudios 2023",
-    fechaInicio: "2023-01-01",
+    codigo: "PE-2025",
+    nombre: "Plan de Estudios 2025",
+    fechaInicio: "2025-01-01",
     fechaFin: "2027-12-31",
     totalCreditos: 200,
     totalCiclos: 10
@@ -623,14 +623,14 @@ const flujoCompletoRequests = [
   
   // 2. Configuración del periodo académico
   createRequest("2.1 Crear periodo académico", "POST", "periodos-academicos", {
-    nombre: "Semestre 2023-I",
-    codigo: "2023-1",
-    fechaInicio: "2023-03-01",
-    fechaFin: "2023-07-31",
-    fechaInicioMatricula: "2023-02-01",
-    fechaFinMatricula: "2023-02-15",
-    fechaInicioMatriculaExtemporanea: "2023-02-16",
-    fechaFinMatriculaExtemporanea: "2023-02-28",
+    nombre: "Semestre 2025-I",
+    codigo: "2025-1",
+    fechaInicio: "2025-03-01",
+    fechaFin: "2025-07-31",
+    fechaInicioMatricula: "2025-05-01",
+    fechaFinMatricula: "2025-06-15",
+    fechaInicioMatriculaExtemporanea: "2025-06-16",
+    fechaFinMatriculaExtemporanea: "2025-06-28",
     estado: "programado"
   }, "Crear un periodo académico"),
   createRequest("2.2 Actualizar estado periodo", "PATCH", "periodos-academicos/1/estado", {
