@@ -1,22 +1,11 @@
-# API Biblioteca (Mejorada) con PostgreSQL
+# API Biblioteca (Mejorada) con PostgreSQL + Frontend Vue.js
 
 ## Requisitos previos
 
 1. **Python 3.8 o superior**
 2. **PostgreSQL 12 o superior**
-3. **Postman** para probar la API
-
-## Instalación
-
-### 1. Clonar el repositorio
-
-```bash# I API Biblioteca (mejorado) con PostgreSQL
-
-## Requisitos previos
-
-1. **Python 3.8 o superior**
-2. **PostgreSQL 12 o superior**
-3. **Postman** para probar la API
+3. **Node.js 16 o superior** (para el frontend)
+4. **npm** (incluido con Node.js)
 
 ## Instalación
 
@@ -24,27 +13,28 @@
 
 ```bash
 git clone https://github.com/JhosepLS/CS2025.git
-cd CS2025/Autores
+cd CS2025/AutoresMejorado
 ```
+
+## Configuración del Backend
 
 ### 2. Crear un entorno virtual
 
 ```bash
 python -m venv venv
-venv\Scripts\activate
+venv\Scripts\activate  # En Windows
+# source venv/bin/activate  # En Linux/Mac
 ```
 
-### 3. Instalar dependencias
+### 3. Instalar dependencias del backend
 
-Alternativa más simple (usando el requirements.txt actualizado):
+Instalacion usando el requirements.txt actualizado:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Nota: Si encuentras problemas con algún paquete, intenta instalarlo individualmente como se muestra ahora
-
-Para una instalación más robusta, instalar cada paquete individualmente:
+Para una instalación más robusta por si existiera algun error, instalar cada paquete individualmente:
 ```bash
 # Instalar Flask y dependencias principales
 pip install flask==2.3.3
@@ -74,13 +64,15 @@ copy .env.example .env
 
 Edita el archivo `.env` con tus credenciales de PostgreSQL:
 
-En este caso:
 ```
 DB_HOST=localhost
 DB_USER=postgres
 DB_PASSWORD=admin
 DB_NAME=biblioteca_db
 DB_PORT=5432
+JWT_SECRET_KEY=altosecreto
+PORT=5000
+FLASK_ENV=development
 ```
 
 ### 5. Configurar la base de datos
@@ -90,350 +82,112 @@ Asegúrate de que PostgreSQL esté en ejecución y luego ejecuta:
 ```bash
 python db_setup.py
 ```
-### 6. Iniciar la aplicación
+
+## Configuración del Frontend
+
+### 6. Instalar dependencias del frontend
 
 ```bash
+cd frontend
+npm install
+```
+
+Si encuentras errores durante la instalación, instala las dependencias principales manualmente:
+
+```bash
+npm install vue@3 vue-router@4 vue-toastification@2.0.0-rc.5 axios
+```
+
+## Ejecución del Sistema
+
+Para ejecutar el sistema completo, necesitas abrir **2 terminales** diferentes:
+
+### Terminal 1 - Backend (API)
+
+```bash
+# Desde la carpeta raíz AutoresMejorado/
+venv\Scripts\activate  # En Windows
+# source venv/bin/activate  # En Linux/Mac
 python app.py
 ```
 
-La API estará disponible en `http://localhost:5000`
+El backend estará disponible en: `http://localhost:5000`
 
+### Terminal 2 - Frontend (Interfaz Web)
 
-## Flujo de Pruebas
+```bash
+# Desde la carpeta AutoresMejorado/frontend/
+npm run serve
+```
 
-### 1. Autenticación
+El frontend estará disponible en: `http://localhost:8080`
 
-#### Registrar un nuevo usuario
+## Acceso al Sistema
 
-1. Crea una nueva solicitud:
-   - Método: POST
-   - URL: `http://localhost:5000/auth/register`
-   - Body:
-   ```json
-   {
-       "username": "nuevo_usuario",
-       "password": "contrasena123",
-       "email": "usuario@example.com"
-   }
-   ```
-2. Envía la solicitud
-3. Deberías recibir una respuesta 201 con los datos del usuario creado
+### URLs de Acceso
 
-#### Iniciar sesión y obtener token
+- **Frontend (Interfaz Web):** http://localhost:8080
+- **Backend (API):** http://localhost:5000
 
-1. Crea una nueva solicitud:
-   - Método: POST
-   - URL: `http://localhost:5000/auth/login`
-   - Body:
-   ```json
-   {
-       "username": "admin",
-       "password": "admin123"
-   }
-   ```
-2. Envía la solicitud
-3. Deberías recibir una respuesta 200 con un token JWT
-4. **Importante**: Copia este token y guárdalo en la variable de entorno `token`
+### Credenciales de Prueba
 
-#### Verificar tu token
+El sistema viene con usuarios predefinidos para pruebas:
 
-1. Crea una nueva solicitud:
-   - Método: GET
-   - URL: `http://localhost:5000/auth/verify`
-   - Headers: `Authorization: Bearer (token)`
-2. Envía la solicitud
-3. Deberías recibir una respuesta 200 confirmando que el token es válido
+**Administrador:**
+- Usuario: `admin`
+- Contraseña: `admin123`
+- Permisos: Gestión completa (crear, editar, eliminar autores, libros y géneros)
 
-### 2. Géneros
+**Usuario Normal:**
+- Usuario: `usuario`
+- Contraseña: `user123`
+- Permisos: Crear y editar autores y libros (no puede eliminar ni gestionar géneros)
 
-#### Obtener todos los géneros
+## Funcionalidades del Sistema
 
-1. Crea una nueva solicitud:
-   - Método: GET
-   - URL: `http://localhost:5000/generos`
-2. Envía la solicitud
-3. Deberías recibir una lista de géneros
+### Frontend Web (Vue.js)
+- **Dashboard principal** con estadísticas del sistema
+- **Gestión de Autores:** Crear, ver, editar y eliminar autores
+- **Gestión de Libros:** Crear, ver, editar y eliminar libros con múltiples autores
+- **Gestión de Géneros:** Crear, ver, editar y eliminar géneros (solo administradores)
+- **Sistema de autenticación** con roles de usuario
+- **Vistas de detalle** para autores y libros
+- **Filtros y búsqueda** en el catálogo de libros
+- **Diseño responsive** para dispositivos móviles
+- **Validaciones en tiempo real** en formularios
+- **Notificaciones** para feedback del usuario
 
-#### Crear un nuevo género (requiere token de administrador)
+### API Backend (Flask)
+- **Autenticación JWT** con roles de usuario
+- **CRUD completo** para autores, libros y géneros
+- **Relaciones complejas** (libros con múltiples autores)
+- **Validaciones de datos** en el servidor
+- **Borrado lógico** para mantener integridad referencial
+- **Documentación de endpoints** disponible
 
-1. Crea una nueva solicitud:
-   - Método: POST
-   - URL: `http://localhost:5000/genero`
-   - Headers: 
-     - `Authorization: Bearer (token)`
-   - Body:
-   ```json
-   {
-       "nombre": "Biografía",
-       "descripcion": "Obras que narran la vida de una persona"
-   }
-   ```
-2. Envía la solicitud
-3. Deberías recibir una respuesta 201 con los datos del género creado
+## Endpoints API Principales
 
-### 3. Autores
-
-#### Obtener todos los autores
-
-1. Crea una nueva solicitud:
-   - Método: GET
-   - URL: `http://localhost:5000/autores`
-2. Envía la solicitud
-3. Deberías recibir una lista de autores
-
-#### Crear un nuevo autor (requiere token)
-
-1. Crea una nueva solicitud:
-   - Método: POST
-   - URL: `http://localhost:5000/autor`
-   - Headers: 
-     - `Authorization: Bearer (token)`
-   - Body:
-   ```json
-   {
-       "nombre": "Mario Vargas Llosa",
-       "pais": "Perú",
-       "anio": 1936
-   }
-   ```
-2. Envía la solicitud
-3. Deberías recibir una respuesta 201 con los datos del autor creado
-4. **Guarda el `autor_id`** para usarlo más adelante
-
-#### Actualizar un autor (requiere token)
-
-1. Crea una nueva solicitud:
-   - Método: PUT
-   - URL: `http://localhost:5000/autor/6` (usa el ID del autor creado anteriormente)
-   - Headers: 
-     - `Content-Type: application/json`
-     - `Authorization: Bearer (token)`
-   - Body:
-   ```json
-   {
-       "nombre": "Mario Vargas Llosa",
-       "pais": "Perú",
-       "anio": 1935
-   }
-   ```
-2. Envía la solicitud
-3. Deberías recibir una respuesta 200 con los datos actualizados
-
-### 4. Libros
-
-#### Obtener todos los libros
-
-1. Crea una nueva solicitud:
-   - Método: GET
-   - URL: `http://localhost:5000/libros`
-2. Envía la solicitud
-3. Deberías recibir una lista de libros con sus autores y géneros
-
-#### Crear un nuevo libro (requiere token)
-
-1. Crea una nueva solicitud:
-   - Método: POST
-   - URL: `http://localhost:5000/libro`
-   - Headers: 
-     - `Authorization: Bearer (token)`
-   - Body:
-   ```json
-   {
-       "titulo": "La ciudad y los perros",
-       "anio": 1963,
-       "genero_id": 1,
-       "autores_ids": [6]
-   }
-   ```
-   Nota: Usa el ID del género "Novela" (que es 1) y el ID del autor que creaste anteriormente.
-
-2. Envía la solicitud
-3. Deberías recibir una respuesta 201 con los datos del libro creado
-4. **Guarda el `libro_id`** para usarlo más adelante
-
-#### Obtener un libro específico
-
-1. Crea una nueva solicitud:
-   - Método: GET
-   - URL: `http://localhost:5000/libro/6` (usa el ID del libro creado anteriormente)
-2. Envía la solicitud
-3. Deberías recibir los datos completos del libro, incluyendo los autores
-
-#### Obtener todos los autores de un libro
-
-1. Crea una nueva solicitud:
-   - Método: GET
-   - URL: `http://localhost:5000/libro/6/autores` (usa el ID del libro creado anteriormente)
-2. Envía la solicitud
-3. Deberías recibir la lista de autores de ese libro
-
-#### Obtener todos los libros de un autor
-
-1. Crea una nueva solicitud:
-   - Método: GET
-   - URL: `http://localhost:5000/autor/6/libros` (usa el ID del autor creado anteriormente)
-2. Envía la solicitud
-3. Deberías recibir la lista de libros escritos por ese autor
-
-#### Actualizar un libro para agregarle otro autor (requiere token)
-
-1. Crea una nueva solicitud:
-   - Método: PUT
-   - URL: `http://localhost:5000/libro/6` (usa el ID del libro creado anteriormente)
-   - Headers: 
-     - `Authorization: Bearer (token)`
-   - Body:
-   ```json
-   {
-       "titulo": "La ciudad y los perros",
-       "anio": 1963,
-       "genero_id": 1,
-       "autores_ids": [6, 1]
-   }
-   ```
-   Nota: Ahora el libro tiene dos autores (el ID 6 que creamos y el ID 1 que ya existía)
-
-2. Envía la solicitud
-3. Deberías recibir una respuesta 200 con los datos actualizados
-
-### 5. Probar validaciones y errores
-
-#### Intentar crear un autor con nombre duplicado
-
-1. Crea una nueva solicitud:
-   - Método: POST
-   - URL: `http://localhost:5000/autor`
-   - Headers: 
-     - `Authorization: Bearer (token)`
-   - Body:
-   ```json
-   {
-       "nombre": "Mario Vargas Llosa",
-       "pais": "España",
-       "anio": 1940
-   }
-   ```
-2. Envía la solicitud
-3. Deberías recibir un error 409 (Conflict) indicando que ya existe un autor con ese nombre
-
-#### Intentar crear un libro sin título
-
-1. Crea una nueva solicitud:
-   - Método: POST
-   - URL: `http://localhost:5000/libro`
-   - Headers: 
-     - `Authorization: Bearer (token)`
-   - Body:
-   ```json
-   {
-       "titulo": "",
-       "anio": 2000,
-       "genero_id": 1,
-       "autores_ids": [1]
-   }
-   ```
-2. Envía la solicitud
-3. Deberías recibir un error 400 indicando que el título es obligatorio
-
-#### Intentar crear un libro con un autor inexistente
-
-1. Crea una nueva solicitud:
-   - Método: POST
-   - URL: `http://localhost:5000/libro`
-   - Headers: 
-     - `Authorization: Bearer (token)`
-   - Body:
-   ```json
-   {
-       "titulo": "Libro con autor inexistente",
-       "anio": 2000,
-       "genero_id": 1,
-       "autores_ids": [999]
-   }
-   ```
-2. Envía la solicitud
-3. Deberías recibir un error 404 indicando que el autor con ID 999 no existe
-
-### 6. Probar eliminación lógica
-
-#### Eliminar un autor (requiere token de administrador)
-
-1. Crea una nueva solicitud:
-   - Método: DELETE
-   - URL: `http://localhost:5000/autor/6` (usa el ID del autor creado anteriormente)
-   - Headers: `Authorization: Bearer (token)`
-2. Envía la solicitud
-3. Deberías recibir una respuesta 200 indicando que el autor fue marcado como eliminado
-
-#### Verificar que el autor no aparece en la lista
-
-1. Crea una nueva solicitud:
-   - Método: GET
-   - URL: `http://localhost:5000/autores`
-2. Envía la solicitud
-3. El autor que eliminaste no debería aparecer en la lista (borrado lógico)
-
-#### Verificar que no se puede acceder al autor eliminado
-
-1. Crea una nueva solicitud:
-   - Método: GET
-   - URL: `http://localhost:5000/autor/6` (usa el ID del autor eliminado)
-2. Envía la solicitud
-3. Deberías recibir un error 404 indicando que el autor no existe o ha sido eliminado
-
-### 7. Probar protección de rutas administrativas
-
-#### Cerrar sesión e iniciar con usuario normal
-
-1. Cierra sesión eliminando el token actual
-2. Inicia sesión con el usuario normal:
-   - Método: POST
-   - URL: `http://localhost:5000/auth/login`
-   - Headers: `Content-Type: application/json`
-   - Body:
-   ```json
-   {
-       "username": "usuario",
-       "password": "user123"
-   }
-   ```
-3. Guarda el nuevo token en la variable de entorno
-
-#### Intentar eliminar un género (solo admin)
-
-1. Crea una nueva solicitud:
-   - Método: DELETE
-   - URL: `http://localhost:5000/genero/6`
-   - Headers: `Authorization: Bearer (token)`
-2. Envía la solicitud
-3. Deberías recibir un error 403 indicando que se requieren privilegios de administrador
-
-### Endpoints disponibles
-
-#### Autenticación
+### Autenticación
 - **POST /auth/register** - Registrar nuevo usuario
 - **POST /auth/login** - Iniciar sesión
-- **GET /auth/verify** - Verificar token (requiere autenticación)
+- **GET /auth/verify** - Verificar token
 
-#### Autores
+### Autores
 - **GET /autores** - Listar todos los autores
 - **GET /autor/{id}** - Obtener un autor por ID
-- **GET /autor/{id}/libros** - Obtener libros de un autor
 - **POST /autor** - Crear autor (requiere autenticación)
 - **PUT /autor/{id}** - Actualizar autor (requiere autenticación)
-- **DELETE /autor/{id}** - Eliminar autor (requiere autenticación de administrador)
+- **DELETE /autor/{id}** - Eliminar autor (requiere admin)
 
-#### Libros
+### Libros
 - **GET /libros** - Listar todos los libros
 - **GET /libro/{id}** - Obtener libro por ID
-- **GET /libro/{id}/autores** - Obtener autores de un libro
 - **POST /libro** - Crear libro (requiere autenticación)
 - **PUT /libro/{id}** - Actualizar libro (requiere autenticación)
-- **DELETE /libro/{id}** - Eliminar libro (requiere autenticación de administrador)
+- **DELETE /libro/{id}** - Eliminar libro (requiere admin)
 
-#### Géneros
+### Géneros
 - **GET /generos** - Listar todos los géneros
-- **GET /genero/{id}** - Obtener género por ID
-- **POST /genero** - Crear género (requiere autenticación de administrador)
-- **PUT /genero/{id}** - Actualizar género (requiere autenticación de administrador)
-- **DELETE /genero/{id}** - Eliminar género (requiere autenticación de administrador)
+- **POST /genero** - Crear género (requiere admin)
+- **PUT /genero/{id}** - Actualizar género (requiere admin)
+- **DELETE /genero/{id}** - Eliminar género (requiere admin)
