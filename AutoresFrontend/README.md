@@ -13,7 +13,7 @@
 
 ```bash
 git clone https://github.com/JhosepLS/CS2025.git
-cd CS2025/AutoresMejorado
+cd CS2025/AutoresFrontend
 ```
 
 ## Configuración del Backend
