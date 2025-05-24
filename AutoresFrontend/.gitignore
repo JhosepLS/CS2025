@@ -1,0 +1,41 @@
+# Archivos de entorno
+.env
+.env.local
+
+# Base de datos SQLite (por si acaso)
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos compilados Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Carpetas de caché Python
+backend/__pycache__/
+backend/blueprints/__pycache__/
+backend/models/__pycache__/
+
+# Entorno virtual
+venv/
+env/
+.env/
+
+# Archivos IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Archivos de log
+*.log
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
+*~
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
